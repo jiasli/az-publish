@@ -26,9 +26,9 @@ def generate_package_list_in_html(title: str, links: Iterable):
 </html>"""
 
 
-def publish(dist: str, account: str, container: str, sas: str) -> None:
+def publish(dist: str, account: str, container: str, credential: str) -> None:
     account_url = f"https://{account}.blob.core.windows.net"
-    service_client = BlobServiceClient(account_url=account_url, credential=sas, connection_timeout=TIMEOUT)
+    service_client = BlobServiceClient(account_url=account_url, credential=credential, connection_timeout=TIMEOUT)
     container_client = service_client.get_container_client(container)
 
     modules_list = []
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('--dist', '-d', help='The folder where the artifacts are saved.')
     parser.add_argument('--account', '-a', help='The storage account name.')
     parser.add_argument('--container', '-c', help='The storage account container.')
-    parser.add_argument('--sas', '-s', help='The storage account Shared Access Signature.')
+    parser.add_argument('--credential', help='SAS token string or Storage Account shared access key.')
 
     args = parser.parse_args()
-    publish(args.dist, args.account, args.container, args.sas)
+    publish(args.dist, args.account, args.container, args.credential)
