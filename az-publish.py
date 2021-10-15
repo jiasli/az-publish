@@ -80,7 +80,10 @@ def publish(dist: str, account: str, container: str, credential: str) -> None:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(prog='az-publish', description='Publish Python build artifacts to Azure Storage Account and create PEP 503 index.')
+    parser = argparse.ArgumentParser(
+        prog='az-publish',
+        description='Publish Python build artifacts to Azure Storage Account and create PEP 503 index.'
+    )
 
     parser.add_argument('--dist', '-d', help='The folder where the artifacts are saved.')
     parser.add_argument('--account', '-a', help='The storage account name.')
