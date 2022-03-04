@@ -15,7 +15,9 @@ TIMEOUT = 120
 
 def generate_package_list_in_html(title: str, links: Iterable):
     package_list = '\n'.join((f'    <a href="{p}">{p}</a><br />' for p in links))
-    return f"""<html>
+    # DOCTYPE is mandatory: https://github.com/pypa/pip/issues/10825
+    return f"""<!DOCTYPE html>
+<html>
 <head>
     <title>{title}</title>
 </head>
